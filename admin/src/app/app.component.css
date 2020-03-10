@@ -1,0 +1,93 @@
+/* Header */
+header {
+	background-image: -webkit-linear-gradient(#ddd6f3 0%, #faaca8 100%);
+	padding: 45px;
+}
+
+header img {
+	float: left;
+	padding-right: 15px;
+	width: 10%;
+	margin-top: -10px;
+}
+
+header h2 {
+	font-size: 230%;
+	color: black;
+}
+
+header h3 {
+	font-size: 125%;
+	padding-bottom: 5px;
+}
+
+
+/* indentation */
+#main p {
+	text-indent: 40px
+}
+
+/* Navigation menu */
+#nav_menu {
+	clear: left;
+}
+
+#nav_menu ul {
+	list-style: none;
+	position: relative;
+}
+
+#nav_menu ul li {
+	float: left;
+}
+
+#nav_menu ul ul {
+	display: none;
+	position: absolute;
+	top: 100%;
+}
+
+#nav_menu ul ul li {
+	float: none;
+}
+
+#nav_menu ul li:hover>ul {
+	display: block;
+}
+
+#nav_menu>ul::after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+#nav_menu ul {
+	margin: 0;
+	padding: 0;
+}
+
+#nav_menu ul li a {
+	text-align: center;
+	display: block;
+	width: 240px;
+	padding: .7em 0;
+	text-decoration: none;
+	background-color: black;
+	color: white;
+}
+
+#nav_menu ul li a.current {
+	color: orange;
+}
+
+#nav_menu ul li a:hover,
+#nav_menu ul li a:focus {
+	background-color: gray;
+}
+
+/* makes the third level work */
+#nav_menu ul ul ul {
+	position: absolute;
+	top: 0;
+	left: 100%;
+}

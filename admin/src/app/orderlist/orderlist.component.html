@@ -1,0 +1,35 @@
+<div class="order" *ngFor="let order of this.Orderlist">
+<!-- passing order id is still an issue -->
+  <div class="titleHead">
+    <select id="orderStatus" class="orderStatus">
+      <option value="toBeConfirmed">To be Confirmed</option>
+      <option value="processing">Processing</option>
+      <option value="prepared">Prepared</option>
+      <option value="cancelled">Cancelled</option>
+  </select>
+  <a href=""><label class="orderNumber">Order#{{order.orderNumber}}&nbsp; </label></a>
+  <label class="orderNumber">Total${{order.total}}&nbsp; </label>
+</div>
+
+  <div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Item Number</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Item Quantity</th>
+          <th scope="col">Item Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of order.orderItems">
+          <th scope="row">{{ i.itemNumber }}</th>
+          <td>{{ i.itemName }}</td>
+          <td>{{ i.itemQuantity }}</td>
+          <td>{{ i.itemPrice }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

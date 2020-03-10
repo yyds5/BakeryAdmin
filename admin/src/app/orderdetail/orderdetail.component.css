@@ -1,0 +1,8 @@
+.shippingDetail label:nth-child(4n+1){
+  font-weight: bold;
+}
+
+.containAll{
+  width: 800px;
+  margin: 0 auto;
+}

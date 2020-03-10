@@ -1,0 +1,81 @@
+<div class="containAll">
+
+<h1>Item No. {{ this.itemNum }}</h1>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <label class="inputLabel" for="itemName">Item Name</label><br/>
+    <input id="itemName">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <label class="inputLabel" for="itemPrice">Item Price</label><br/>
+    <input type="number" id="itemPrice"  value="">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <label class="inputLabel" for="itemQuantity">Item Quantity</label><br/>
+    <input type="number" id="itemQuantity" value="">
+  </mat-form-field>
+
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="upload">Upload</span>
+    </div>
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" id="upload"
+        aria-describedby="upload">
+      <label class="custom-file-label" for="upload">Choose file</label>
+    </div>
+    <div *ngFor="let photo of photoList">
+      <img mat-card-image src="../../assets/image/ {{ photo }}" alt="..." class="img-thumbnail">
+    </div>
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <label class="inputLabel">Item Description</label>
+    <textarea class="inputTextArea" id="itemDescription" matInput ></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <label class="inputLabel">Item Allergic Content</label>
+    <textarea class="inputTextArea" id="itemAllergic" matInput ></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <label class="inputLabel">Item Comment</label>
+    <textarea class="inputTextArea" id="itemComment" matInput ></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <label class="inputLabel" for="itemSugar">Item Sugar</label> &nbsp;
+    <select id="itemSugar">
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+      <option value="Zero">Zero</option>
+      <option value="N/A">N/A</option>
+    </select><br/>
+    <label class="inputLabel" for="itemCalorie">Item Calorie</label> &nbsp;
+    <select id="itemCalorie">
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+      <option value="Zero">Zero</option>
+      <option value="N/A">N/A</option>
+    </select><br/>
+    <label class="inputLabel" for="itemFat">Item Fat</label> &nbsp;
+    <select id="itemFat">
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+      <option value="Zero">Zero</option>
+      <option value="N/A">N/A</option>
+    </select><br/>
+  </mat-form-field>
+
+
+  <button mat-flat-button type="submit" [disabled]="!form.form.valid">
+    Submit
+  </button>
+</form>
+</div>

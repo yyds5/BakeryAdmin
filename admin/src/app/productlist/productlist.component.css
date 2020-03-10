@@ -1,0 +1,25 @@
+.mat-card{
+    max-width: 200px;
+    max-height: 300px;
+    margin:auto;
+    padding: 20px;
+    display:inline-block;
+    background-color:skyblue;
+    border-color: burlywood;
+    border-width: 2px;
+}
+.mat-card-actions{
+    display:flex;
+}
+.mat-card-content{
+    color:black;
+}
+.productStatus{
+    float: right;
+    background-color: #4CAF50;
+    color: white;
+    padding: 2px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}

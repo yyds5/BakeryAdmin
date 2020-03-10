@@ -1,0 +1,26 @@
+.example-form {
+  width: 500px;
+
+}
+
+.example-full-width {
+  text-align: center;
+  width: 500px;
+  border: 1px solid black;
+}
+
+.inputLabel{
+  font-weight: bold;
+}
+
+.inputTextArea{
+  border:1px solid gray;
+}
+
+.img-thumbnail{
+  height: 100px;
+}
+.containAll{
+  width: 500px;
+margin: 0 auto;}
+
