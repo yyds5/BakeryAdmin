@@ -14,7 +14,6 @@ import { ProductcreateComponent } from './productcreate/productcreate.component'
 import { ProducteditComponent } from './productedit/productedit.component';
 import { ReportpageComponent } from './reportpage/reportpage.component';
 import { OrderlistComponent } from './orderlist/orderlist.component';
-import { SlideshowComponent } from './slideshow/slideshow.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +23,6 @@ import { SlideshowComponent } from './slideshow/slideshow.component';
     ProducteditComponent,
     ReportpageComponent,
     OrderlistComponent,
-    SlideshowComponent,
 
   ],
   imports: [

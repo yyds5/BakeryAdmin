@@ -3,6 +3,16 @@
 }
 
 .containAll{
-  width: 800px;
+  width:1200px;
   margin: 0 auto;
+}
+
+.orderItems{
+  width:500px;
+  float: left;
+  margin: 30px;
+}
+
+.shippingDetail{
+  display: inline;
 }

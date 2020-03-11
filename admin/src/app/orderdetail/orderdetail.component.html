@@ -1,10 +1,9 @@
 <div class="containAll">
-<div>
   <h1>Order Number: {{ this.Order.orderNumber }}</h1>
   <h1>Order Date: {{ this.Order.orderDate }}</h1>
-<!-- could not fetch data from orderItems -->
 <div class="orderItems">
     <h1>Order Items</h1>
+
     <div>
        <table class="table">
       <thead class="thead-dark">
@@ -25,9 +24,10 @@
       </tbody>
     </table>
 </div>
+</div>
 
-<h1>Shipping Detail</h1><br/>
   <div class="shippingDetail">
+    <h1>Shipping Detail</h1><br/>
     <label > Full Name </label> <br/>
     <label id="fullName">{{this.Order.shippingDetail.fullName}}</label><br/>
     <label> Address </label> <br/>
@@ -47,5 +47,5 @@
     <label> Delivery Note </label> <br/>
     <textarea cols="50" id="deliveryNote" readonly>{{this.Order.shippingDetail.deliveryNote}}</textarea>
   </div>
-</div>
+
 </div>

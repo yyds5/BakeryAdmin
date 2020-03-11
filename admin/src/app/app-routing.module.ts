@@ -7,7 +7,6 @@ import { ProducteditComponent } from './productedit/productedit.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
 import { ReportpageComponent } from './reportpage/reportpage.component';
 import { OrderlistComponent } from './orderlist/orderlist.component';
-import { SlideshowComponent } from './slideshow/slideshow.component';
 
 
 const routes: Routes = [
@@ -18,7 +17,6 @@ const routes: Routes = [
   {path:'orderdetail', component:OrderdetailComponent},
   {path:'reportpage', component:ReportpageComponent},
   {path:'orderlist', component:OrderlistComponent},
-  {path:'slideshow', component:SlideshowComponent},
 ];
 
 @NgModule({
@@ -26,4 +24,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [SlideshowComponent,OrderlistComponent,LoginComponent,ReportpageComponent, ProductlistComponent,ProductcreateComponent,ProducteditComponent,OrderdetailComponent]
+export const routingComponents = [OrderlistComponent,LoginComponent,ReportpageComponent, ProductlistComponent,ProductcreateComponent,ProducteditComponent,OrderdetailComponent]
