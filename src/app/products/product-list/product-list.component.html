@@ -1,0 +1,17 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="products.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let product of products">
+    <mat-expansion-panel-header>
+      {{ product.name }}
+    </mat-expansion-panel-header>
+    <div class="post-image">
+      <img [src]="product.imagePath" [alt]="product.name">
+    </div>
+    <p>{{ product.price }}</p>
+    <mat-action-row>
+      <a mat-button color="primary" [routerLink]="['/editproduct', product.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(product.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="products.length <= 0 && !isLoading">No products added yet!</p>
