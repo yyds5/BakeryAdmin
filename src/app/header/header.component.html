@@ -1,0 +1,49 @@
+<!-- <mat-toolbar color="primary">
+  <span>
+    <a routerLink="/productlist">Bakery Admin</a>
+  </span>
+  <span class="spacer"></span>
+  <ul>
+    <li>
+      <a mat-button routerLink="/createproduct" routerLinkActive="mat-accent">New Product</a>
+    </li>
+    <li>
+      <a mat-button routerLink="/productlist" routerLinkActive="mat-accent">Product List</a>
+    </li>
+  </ul>
+</mat-toolbar> -->
+<header>
+  <a href="/orderlist"><img src="http://localhost:3000/images/ttrr-1585052871452.jpg" alt="headerlogo"></a>
+  <h2>Bakery Ecommerce Management System</h2>
+</header>
+<nav id="nav_menu">
+  <ul>
+    <li>
+      <a [routerLink]="['/orderlist']" routerLinkActive="router-link-active">
+        Orders
+        </a>
+    </li>
+
+    <li>
+      <a [routerLink]="['/createproduct']" routerLinkActive="router-link-active">
+        Product create
+        </a>
+    </li>
+
+    <li>
+      <a [routerLink]="['/productlist']" routerLinkActive="router-link-active">
+        Product list
+        </a>
+    </li>
+    <li>
+      <a [routerLink]="['/reportpage']" routerLinkActive="router-link-active">
+        Report
+        </a>
+    </li>
+    <li>
+      <a [routerLink]="['/logout']" routerLinkActive="router-link-active">
+        Log out
+        </a>
+    </li>
+  </ul>
+</nav>
