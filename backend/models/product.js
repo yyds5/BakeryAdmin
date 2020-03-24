@@ -12,7 +12,6 @@ const productSchema = mongoose.Schema({
   category:{ type: String, required: true },
   isGift:{ type: String, required: true },
   itemComment:{ type: String, required: true },
-  itemTotal:{ type: Number, required: true },
   sugarLevel:{ type: Number, required: true },
   calorieLevel:{ type: Number, required: true },
   fatLevel:{ type: Number, required: true },
