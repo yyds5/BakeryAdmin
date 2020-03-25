@@ -17,11 +17,13 @@ import { AppComponent } from "./app.component";
 import { PostCreateComponent } from "./posts/post-create/post-create.component";
 import { ProductCreateComponent } from "./products/product-create/product-create.component";
 import { ProductListComponent } from "./products/product-list/product-list.component";
+import { OrderListComponent } from "./orders/order-list/order-list.component";
+import { OrderUpdateComponent } from "./orders/order-update/order-update.component";
+
 
 import { HeaderComponent } from "./header/header.component";
 import { PostListComponent } from "./posts/post-list/post-list.component";
 import { AppRoutingModule } from "./app-routing.module";
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,9 @@ import { AppRoutingModule } from "./app-routing.module";
     HeaderComponent,
     PostListComponent,
     ProductCreateComponent,
-    ProductListComponent
+    ProductListComponent,
+    OrderListComponent,
+    OrderUpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSaveOrder()" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput type="text" formControlName="shipping_id" placeholder="shipping_id">
+      <mat-error *ngIf="form.get('shipping_id').invalid">Please enter a shipping id.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+    <mat-label>Status?</mat-label>
+    <mat-select formControlName="status">
+      <mat-option value="ToBeConfirmed">To be confirmed</mat-option>
+      <mat-option value="Processing">Processing</mat-option>
+      <mat-option value="Prepared">Prepared</mat-option>
+      <mat-option value="Shipped">Shipped</mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('status').invalid"></mat-error>
+  </mat-form-field>
+<button mat-raised-button color="accent" type="submit">Save Product</button>
+</form>
+</mat-card>
