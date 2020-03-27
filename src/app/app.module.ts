@@ -19,6 +19,9 @@ import { ProductCreateComponent } from "./products/product-create/product-create
 import { ProductListComponent } from "./products/product-list/product-list.component";
 import { OrderListComponent } from "./orders/order-list/order-list.component";
 import { OrderUpdateComponent } from "./orders/order-update/order-update.component";
+import { LoginComponent } from "./login/login.component";
+import { LogoutComponent } from "./logout/logout.component";
+
 
 
 import { HeaderComponent } from "./header/header.component";
@@ -33,7 +36,9 @@ import { AppRoutingModule } from "./app-routing.module";
     ProductCreateComponent,
     ProductListComponent,
     OrderListComponent,
-    OrderUpdateComponent
+    OrderUpdateComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

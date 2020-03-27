@@ -8,6 +8,9 @@ import { ProductListComponent } from "./products/product-list/product-list.compo
 import { ProductCreateComponent } from "./products/product-create/product-create.component";
 import { OrderListComponent } from "./orders/order-list/order-list.component";
 import { OrderUpdateComponent } from "./orders/order-update/order-update.component";
+import { LoginComponent } from "./login/login.component";
+import { LogoutComponent } from "./logout/logout.component";
+
 
 
 const routes: Routes = [
@@ -19,6 +22,10 @@ const routes: Routes = [
   { path: 'productlist', component: ProductListComponent },
   { path: '', component: OrderListComponent },
   { path: 'updateorder/:order_id', component: OrderUpdateComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
+
+
 
 
 ];

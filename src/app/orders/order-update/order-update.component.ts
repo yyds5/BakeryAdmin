@@ -60,18 +60,18 @@ export class OrderUpdateComponent implements OnInit {
           this.form.setValue({
           shipping_id: this.order.shipping_id,
           status: this.order.status,
-        // customer_id: this.order.customer_id,
-        // subtotal: this.order.subtotal,
-        // tax: this.order.tax,
-        // total: this.order.total,
-        // date: this.order.date,
-        // orderProductId: this.order.orderProductId,
-        // orderProductName: this.order.orderProductName,
-        // orderProductIsDonation: this.order.orderProductIsDonation,
-        // orderProductIsGift: this.order.orderProductIsGift,
-        // orderProductComment: this.order.orderProductComment,
-        // orderProductQuantity: this.order.orderProductQuantity,
-        // orderProductPrice: this.order.orderProductPrice
+        customer_id: this.order.customer_id,
+        subtotal: this.order.subtotal,
+        tax: this.order.tax,
+        total: this.order.total,
+        date: this.order.date,
+        orderProductId: this.order.orderProductId,
+        orderProductName: this.order.orderProductName,
+        orderProductIsDonation: this.order.orderProductIsDonation,
+        orderProductIsGift: this.order.orderProductIsGift,
+        orderProductComment: this.order.orderProductComment,
+        orderProductQuantity: this.order.orderProductQuantity,
+        orderProductPrice: this.order.orderProductPrice
           });
         });
       } else {

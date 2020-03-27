@@ -1,0 +1,13 @@
+.example-form {
+    width: 500px;
+  }
+
+
+*{
+    background-color: lightgray;
+    color:black;
+}
+
+.containAll{
+  width: 500px;
+margin: 0 auto;}
