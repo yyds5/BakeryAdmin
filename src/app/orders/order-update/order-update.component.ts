@@ -15,7 +15,9 @@ export class OrderUpdateComponent implements OnInit {
   order: Order;
   isLoading = false;
   form: FormGroup;
-  private order_id: string;
+  private mode = "create";
+  private orderId: string;
+
 
   constructor(
     public ordersService: OrdersService,
@@ -24,17 +26,22 @@ export class OrderUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      price: new FormControl(null, { validators: [Validators.required] }),
       shipping_id: new FormControl(null, { validators: [Validators.required] }),
+      status: new FormControl(null, { validators: [Validators.required] }),
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      console.log(paramMap);
       if (paramMap.has("order_id")) {
-        this.order_id = paramMap.get("order_id");
+        this.mode = "edit";
+        this.orderId = paramMap.get("order_id");
+        console.log(this.orderId)
+        console.log(this.order)
+
         this.isLoading = true;
-        this.ordersService.getOrder(this.order_id).subscribe(orderData => {
+        this.ordersService.getOrder(this.orderId).subscribe(orderData => {
           this.isLoading = false;
           this.order = {
-            order_id: orderData.order_id,
+          id: orderData._id,
         shipping_id: orderData.shipping_id,
         status: orderData.status,
         customer_id: orderData.customer_id,
@@ -51,25 +58,27 @@ export class OrderUpdateComponent implements OnInit {
         orderProductPrice: orderData.orderProductPrice
           };
           this.form.setValue({
-            order_id: this.order.order_id,
-        shipping_id: this.order.shipping_id,
-        status: this.order.status,
-        customer_id: this.order.customer_id,
-        subtotal: this.order.subtotal,
-        tax: this.order.tax,
-        total: this.order.total,
-        date: this.order.date,
-        orderProductId: this.order.orderProductId,
-        orderProductName: this.order.orderProductName,
-        orderProductIsDonation: this.order.orderProductIsDonation,
-        orderProductIsGift: this.order.orderProductIsGift,
-        orderProductComment: this.order.orderProductComment,
-        orderProductQuantity: this.order.orderProductQuantity,
-        orderProductPrice: this.order.orderProductPrice
+          shipping_id: this.order.shipping_id,
+          status: this.order.status,
+        // customer_id: this.order.customer_id,
+        // subtotal: this.order.subtotal,
+        // tax: this.order.tax,
+        // total: this.order.total,
+        // date: this.order.date,
+        // orderProductId: this.order.orderProductId,
+        // orderProductName: this.order.orderProductName,
+        // orderProductIsDonation: this.order.orderProductIsDonation,
+        // orderProductIsGift: this.order.orderProductIsGift,
+        // orderProductComment: this.order.orderProductComment,
+        // orderProductQuantity: this.order.orderProductQuantity,
+        // orderProductPrice: this.order.orderProductPrice
           });
         });
       } else {
-        this.order_id = null;
+        this.mode = "create";
+
+        this.orderId = null;
+
       }
     });
   }
@@ -82,8 +91,7 @@ export class OrderUpdateComponent implements OnInit {
     }
     this.isLoading = true;
       this.ordersService.updateOrder(
-        this.order_id,
-        this.form.value.order_id,
+        this.orderId,
         this.form.value.shipping_id,
         this.form.value.status,
         this.form.value.customer_id,

@@ -11,13 +11,13 @@ import { OrderUpdateComponent } from "./orders/order-update/order-update.compone
 
 
 const routes: Routes = [
-  { path: '', component: PostListComponent },
+  // { path: '', component: PostListComponent },
   { path: 'create', component: PostCreateComponent },
   { path: 'edit/:postId', component: PostCreateComponent },
   { path: 'createproduct', component: ProductCreateComponent },
   { path: 'editproduct/:productId', component: ProductCreateComponent },
   { path: 'productlist', component: ProductListComponent },
-  { path: 'orderlist', component: OrderListComponent },
+  { path: '', component: OrderListComponent },
   { path: 'updateorder/:order_id', component: OrderUpdateComponent },
 
 

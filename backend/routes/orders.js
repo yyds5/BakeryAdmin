@@ -5,11 +5,6 @@ const Order = require("../models/order");
 
 const router = express.Router();
 
-const MIME_TYPE_MAP = {
-  "image/png": "png",
-  "image/jpeg": "jpg",
-  "image/jpg": "jpg"
-};
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -30,6 +25,39 @@ const storage = multer.diskStorage({
   }
 });
 
+router.post(
+  "",
+  (req, res, next) => {
+    const url = req.protocol + "://" + req.get("host");
+    const order = new Order({
+      shipping_id: req.body.shipping_id,
+      status: req.body.status,
+      customer_id: req.body.customer_id,
+      subtotal: req.body.subtotal,
+      tax: req.body.tax,
+      total: req.body.total,
+      date: req.body.date,
+      orderProductId: req.body.orderProductId,
+      orderProductName: req.body.orderProductName,
+      orderProductIsDonation: req.body.orderProductIsDonation,
+      orderProductIsGift: req.body.orderProductIsGift,
+      orderProductComment: req.body.orderProductComment,
+      orderProductQuantity: req.body.orderProductQuantity,
+      orderProductPrice: req.body.orderProductPrice
+
+    });
+    order.save().then(createOrder => {
+      res.status(201).json({
+        message: "Order added successfully",
+        order: {
+          ...createOrder,
+          id: createdOrder._id
+        }
+      });
+    });
+  }
+);
+
 router.put(
   "/:id",
   multer({ storage: storage }).single("image"),
@@ -41,12 +69,23 @@ router.put(
     }
     const order = new Order({
       _id: req.body.id,
-      title: req.body.title,
-      content: req.body.content,
-      imagePath: imagePath
+      shipping_id: req.body.shipping_id,
+      status: req.body.status,
+      customer_id: req.body.customer_id,
+      subtotal: req.body.subtotal,
+      tax: req.body.tax,
+      total: req.body.total,
+      date: req.body.date,
+      orderProductId: req.body.orderProductId,
+      orderProductName: req.body.orderProductName,
+      orderProductIsDonation: req.body.orderProductIsDonation,
+      orderProductIsGift: req.body.orderProductIsGift,
+      orderProductComment: req.body.orderProductComment,
+      orderProductQuantity: req.body.orderProductQuantity,
+      orderProductPrice: req.body.orderProductPrice
     });
     console.log(order);
-    Order.updateOne({ _id: req.params._id }, order).then(result => {
+    Order.updateOne({ _id: req.params.id }, order).then(result => {
       res.status(200).json({ message: "Update successful!" });
     });
   }
@@ -62,7 +101,7 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.get("/:_id", (req, res, next) => {
+router.get("/:id", (req, res, next) => {
   Order.findById(req.params.id).then(order => {
     if (order) {
       res.status(200).json(order);
@@ -71,5 +110,16 @@ router.get("/:_id", (req, res, next) => {
     }
   });
 });
+
+// //get one base on the id
+// router.get("/:id", (req, res, next) => {
+//   Order.findOne({order_id:req.params.id}).then(order => {
+//     if (order) {
+//       res.status(200).json(order);
+//     } else {
+//       res.status(404).json({ message: "order not found!" });
+//     }
+//   });
+// });
 
 module.exports = router;

@@ -2,7 +2,7 @@
 <mat-accordion multi="true" *ngIf="orders.length > 0 && !isLoading">
   <mat-expansion-panel *ngFor="let order of orders">
     <mat-expansion-panel-header>
-      <span class="orderId"><strong>Order # </strong> &nbsp;{{ order.order_id }}&nbsp;</span>
+      <span class="orderId"><strong>Order # </strong> &nbsp;{{ order.id }}&nbsp;</span>
       <span class="date"> <strong>Date </strong> &nbsp;{{ order.date }}&nbsp;</span>
       <span class="status"><strong>Status </strong> &nbsp;{{order.status}}&nbsp;</span>
     </mat-expansion-panel-header>
@@ -13,7 +13,7 @@
     <strong>Tax: </strong> &nbsp;{{ order.tax }}&nbsp;
     <strong>Total: </strong> &nbsp;{{ order.total }}&nbsp;
 
-    <a mat-button color="primary" [routerLink]="['/updateorder', order.order_id]">Update</a>
+    <a mat-button color="primary" [routerLink]="['/updateorder', order.id]">Update</a>
     <div class="order">
       <div>
         <table class="table">

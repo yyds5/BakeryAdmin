@@ -19,7 +19,7 @@ export class OrdersService {
         map(orderData => {
           return orderData.orders.map(order => {
             return {
-              order_id: order.order_id,
+              id: order._id,
               shipping_id: order.shipping_id,
               status: order.status,
               customer_id: order.customer_id,
@@ -51,7 +51,6 @@ export class OrdersService {
   getOrder(id: string) {
     return this.http.get<{
       _id: string,
-      order_id: string,
       shipping_id: string,
       status: string,
       customer_id: string,
@@ -71,8 +70,7 @@ export class OrdersService {
   }
 
   updateOrder(
-    _id: string,
-    order_id: string,
+    id: string,
     shipping_id: string,
     status: string,
     customer_id: string,
@@ -89,7 +87,7 @@ export class OrdersService {
     orderProductPrice: Array<number>[] ) {
     let orderData: Order | FormData;
       orderData = {
-        order_id: order_id,
+        id: id,
         shipping_id: shipping_id,
         status: status,
         customer_id: customer_id,
@@ -106,12 +104,12 @@ export class OrdersService {
         orderProductPrice: orderProductPrice
       };
     this.http
-      .put("http://localhost:3000/api/orders/" + order_id, orderData)
+      .put("http://localhost:3000/api/orders/" + id, orderData)
       .subscribe(response => {
         const updatedOrders = [...this.orders];
-        const oldOrderIndex = updatedOrders.findIndex(p => p.order_id === order_id);
+        const oldOrderIndex = updatedOrders.findIndex(p => p.id === id);
         const order: Order = {
-          order_id: order_id,
+          id: id,
           shipping_id: shipping_id,
           status: status,
           customer_id: customer_id,
@@ -130,7 +128,7 @@ export class OrdersService {
         updatedOrders[oldOrderIndex] = order;
         this.orders = updatedOrders;
         this.ordersUpdated.next([...this.orders]);
-        this.router.navigate(["/orderlist"]);
+        this.router.navigate(["/"]);
       });
   }
 
