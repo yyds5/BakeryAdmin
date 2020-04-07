@@ -1,23 +1,25 @@
-/* ul {
+ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  float: left;
 }
 
-li{
-  height: 50px;
-}
 a {
   text-decoration: none;
   color: white;
-  display:inline-block
+}
+
+ul {
+  display: flex;
 }
 
 .spacer {
   flex: 1 1 auto;
-} */
-/* Header */
+}
+
+
+/*
+
 header {
 	background-image: -webkit-linear-gradient(#ddd6f3 0%, #faaca8 100%);
 	padding: 1px;
@@ -43,12 +45,11 @@ header h3 {
 }
 
 
-/* indentation */
+
 #main p {
 	text-indent: 40px
 }
 
-/* Navigation menu */
 #nav_menu {
   clear: left;
   width: 100%;
@@ -110,9 +111,9 @@ header h3 {
 	background-color: gray;
 }
 
-/* makes the third level work */
 #nav_menu ul ul ul {
 	position: absolute;
 	top: 0;
 	left: 100%;
 }
+*/

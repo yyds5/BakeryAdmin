@@ -13,7 +13,7 @@
     <strong>Tax: </strong> &nbsp;{{ order.tax }}&nbsp;
     <strong>Total: </strong> &nbsp;{{ order.total }}&nbsp;
 
-    <a mat-button color="primary" [routerLink]="['/updateorder', order.id]">Update</a>
+    <a *ngIf="userIsAuthenticated" mat-button color="primary" [routerLink]="['/updateorder', order.id]">Update</a>
     <div class="order">
       <div>
         <table class="table">
@@ -47,4 +47,5 @@
 
 
 </mat-accordion>
+
 <p class="info-text mat-body-1" *ngIf="orders.length <= 0 && !isLoading">No orders yet!</p>

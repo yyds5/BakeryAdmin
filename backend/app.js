@@ -6,13 +6,14 @@ const mongoose = require("mongoose");
 const postsRoutes = require("./routes/posts");
 const productsRoutes = require("./routes/products");
 const ordersRoutes = require("./routes/orders");
+const userRoutes = require("./routes/user");
 
 
 const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://fei:fei@bakery-tijpa.mongodb.net/test?retryWrites=true&w=majority"
+    "mongodb+srv://yuhe:yuan@bakery-tijpa.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true }
   )
   .then(() => {
     console.log("Connected to database!");
@@ -29,7 +30,8 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -41,6 +43,7 @@ app.use((req, res, next) => {
 app.use("/api/posts", postsRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/api/orders", ordersRoutes);
+app.use("/api/user", userRoutes);
 
 
 

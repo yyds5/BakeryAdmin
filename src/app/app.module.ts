@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule,HTTP_INTERCEPTORS } from "@angular/common/http";
 import {
   MatInputModule,
   MatCardModule,
@@ -10,8 +10,10 @@ import {
   MatToolbarModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
-  MatSelectModule
+  MatSelectModule,
 } from "@angular/material";
+import { FormsModule } from '@angular/forms';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { AppComponent } from "./app.component";
 import { PostCreateComponent } from "./posts/post-create/post-create.component";
@@ -19,8 +21,10 @@ import { ProductCreateComponent } from "./products/product-create/product-create
 import { ProductListComponent } from "./products/product-list/product-list.component";
 import { OrderListComponent } from "./orders/order-list/order-list.component";
 import { OrderUpdateComponent } from "./orders/order-update/order-update.component";
-import { LoginComponent } from "./login/login.component";
+import { LoginComponent } from "./auth/login/login.component";
+import { SignupComponent } from "./auth/signup/signup.component";
 import { LogoutComponent } from "./logout/logout.component";
+import { AuthInterceptor } from "./auth/auth-interceptor";
 
 
 
@@ -38,10 +42,12 @@ import { AppRoutingModule } from "./app-routing.module";
     OrderListComponent,
     OrderUpdateComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -52,9 +58,12 @@ import { AppRoutingModule } from "./app-routing.module";
     MatExpansionModule,
     MatProgressSpinnerModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

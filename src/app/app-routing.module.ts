@@ -8,22 +8,26 @@ import { ProductListComponent } from "./products/product-list/product-list.compo
 import { ProductCreateComponent } from "./products/product-create/product-create.component";
 import { OrderListComponent } from "./orders/order-list/order-list.component";
 import { OrderUpdateComponent } from "./orders/order-update/order-update.component";
-import { LoginComponent } from "./login/login.component";
+import { LoginComponent } from "./auth/login/login.component";
+
 import { LogoutComponent } from "./logout/logout.component";
+import { SignupComponent } from "./auth/signup/signup.component";
+import { AuthGuard } from "./auth/auth.guard";
 
 
 
 const routes: Routes = [
   // { path: '', component: PostListComponent },
-  { path: 'create', component: PostCreateComponent },
-  { path: 'edit/:postId', component: PostCreateComponent },
-  { path: 'createproduct', component: ProductCreateComponent },
-  { path: 'editproduct/:productId', component: ProductCreateComponent },
+  { path: 'create', component: PostCreateComponent,canActivate: [AuthGuard] },
+  { path: 'edit/:postId', component: PostCreateComponent,canActivate: [AuthGuard] },
+  { path: 'createproduct', component: ProductCreateComponent,canActivate: [AuthGuard] },
+  { path: 'editproduct/:productId', component: ProductCreateComponent,canActivate: [AuthGuard] },
   { path: 'productlist', component: ProductListComponent },
   { path: '', component: OrderListComponent },
-  { path: 'updateorder/:order_id', component: OrderUpdateComponent },
+  { path: 'updateorder/:order_id', component: OrderUpdateComponent,canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: "signup", component: SignupComponent },
 
 
 
@@ -32,6 +36,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
+
 })
 export class AppRoutingModule {}

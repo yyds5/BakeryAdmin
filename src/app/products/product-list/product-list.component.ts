@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { Product } from "../product.model";
 import { ProductsService } from "../products.service";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "app-product-list",
@@ -13,8 +14,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   isLoading = false;
   private productsSub: Subscription;
+  userIsAuthenticated = false;
+  private authStatusSub: Subscription;
 
-  constructor(public productsService: ProductsService) {}
+  constructor(public productsService: ProductsService,
+    private authService: AuthService
+    ) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -24,6 +29,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.products = products;
       });
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService
+      .getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuthenticated = isAuthenticated;
+      });
   }
 
   onDelete(productId: string) {
@@ -32,5 +43,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.productsSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
   }
 }
