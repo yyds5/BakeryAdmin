@@ -86,6 +86,25 @@ export class OrdersService {
     orderProductQuantity: Array<number>[],
     orderProductPrice: Array<number>[] ) {
     let orderData: Order | FormData;
+    orderData = new FormData();
+    // orderData.append("id",id);
+    // orderData.append("shipping_id",shipping_id);
+    // orderData.append("status",status);
+    // orderData.append("customer_id",customer_id);
+    // orderData.append("subtotal",subtotal.toString());
+    // orderData.append("tax",tax.toString());
+    // orderData.append("total",total.toString());
+    // orderData.append("date",date);
+    // orderData.append("orderProductId",orderProductId.toString());
+    // orderData.append("orderProductName",orderProductName.toString());
+    // orderData.append("orderProductIsDonation",orderProductIsDonation.toString());
+    // orderData.append("orderProductIsGift",orderProductIsGift.toString());
+    // orderData.append("orderProductComment",orderProductComment.toString());
+    // orderData.append("orderProductIsDonation",orderProductIsDonation.toString());
+    // orderData.append("orderProductQuantity",orderProductQuantity.toString());
+    // orderData.append("orderProductPrice",orderProductPrice.toString());
+    console.log(orderProductName);
+
       orderData = {
         id: id,
         shipping_id: shipping_id,
@@ -103,6 +122,7 @@ export class OrdersService {
         orderProductQuantity: orderProductQuantity,
         orderProductPrice: orderProductPrice
       };
+      console.log(orderData);
     this.http
       .put("http://localhost:3000/api/orders/" + id, orderData)
       .subscribe(response => {
