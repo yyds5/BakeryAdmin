@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 
 import { Order } from "./order.model";
+import { orderProducts } from "./order.model";
 
 @Injectable({ providedIn: "root" })
 export class OrdersService {
@@ -20,20 +21,22 @@ export class OrdersService {
           return orderData.orders.map(order => {
             return {
               id: order._id,
-              shipping_id: order.shipping_id,
-              status: order.status,
-              customer_id: order.customer_id,
-              subtotal: order.subtotal,
-              tax: order.tax,
-              total: order.total,
-              date: order.date,
-              orderProductId: order.orderProductId,
-              orderProductName: order.orderProductName,
-              orderProductIsDonation: order.orderProductIsDonation,
-              orderProductIsGift: order.orderProductIsGift,
-              orderProductComment: order.orderProductComment,
-              orderProductQuantity: order.orderProductQuantity,
-              orderProductPrice: order.orderProductPrice
+              status:order.status,
+              shippingDetail:order.shippingDetail,
+              subtotal:order.subtotal,
+              tax:order.tax,
+              total:order.total,
+              date:order.date,
+              orderProducts : order.orderProducts,
+              paymentMethod:order.paymentMethod,
+              customerFullName:order.customerFullName,
+              phone:order.phone,
+              email:order.email,
+              shippingAddress:order.shippingAddress,
+              deliveryNote:order.deliveryNote,
+              city:order.city,
+              province:order.province,
+              postalCode:order.postalCode
             };
           });
         })
@@ -51,101 +54,98 @@ export class OrdersService {
   getOrder(id: string) {
     return this.http.get<{
       _id: string,
-      shipping_id: string,
-      status: string,
-      customer_id: string,
-      subtotal: number,
-      tax: number,
-      total: number,
-      date: string,
-      orderProductId: Array<string>[],
-      orderProductName: Array<string>[],
-      orderProductIsDonation: Array<string>[],
-      orderProductIsGift: Array<string>[],
-      orderProductComment: Array<string>[],
-      orderProductQuantity: Array<number>[],
-      orderProductPrice: Array<number>[]}>(
+      status:string,
+      shippingDetail:string,
+      subtotal:number,
+      tax:number,
+      total:number,
+      date:Date,
+      orderProducts : Array<orderProducts>,
+      paymentMethod:string,
+      customerFullName:string,
+      phone:string,
+      email:string,
+      shippingAddress:string,
+      deliveryNote:string,
+      city:string,
+      province:string,
+      postalCode:string
+      }>(
       "http://localhost:3000/api/orders/" + id
     );
   }
 
   updateOrder(
     id: string,
-    shipping_id: string,
-    status: string,
-    customer_id: string,
-    subtotal: number,
-    tax: number,
-    total: number,
-    date: string,
-    orderProductId: Array<string>[],
-    orderProductName: Array<string>[],
-    orderProductIsDonation: Array<string>[],
-    orderProductIsGift: Array<string>[],
-    orderProductComment: Array<string>[],
-    orderProductQuantity: Array<number>[],
-    orderProductPrice: Array<number>[] ) {
+    status:string,
+    shippingDetail:string,
+      subtotal:number,
+      tax:number,
+      total:number,
+      date:Date,
+      orderProducts,
+      paymentMethod:string,
+      customerFullName:string,
+      phone:string,
+      email:string,
+      shippingAddress:string,
+      deliveryNote:string,
+      city:string,
+      province:string,
+      postalCode:string
+       ) {
     let orderData: Order | FormData;
     orderData = new FormData();
-    // orderData.append("id",id);
-    // orderData.append("shipping_id",shipping_id);
-    // orderData.append("status",status);
-    // orderData.append("customer_id",customer_id);
-    // orderData.append("subtotal",subtotal.toString());
-    // orderData.append("tax",tax.toString());
-    // orderData.append("total",total.toString());
-    // orderData.append("date",date);
-    // orderData.append("orderProductId",orderProductId.toString());
-    // orderData.append("orderProductName",orderProductName.toString());
-    // orderData.append("orderProductIsDonation",orderProductIsDonation.toString());
-    // orderData.append("orderProductIsGift",orderProductIsGift.toString());
-    // orderData.append("orderProductComment",orderProductComment.toString());
-    // orderData.append("orderProductIsDonation",orderProductIsDonation.toString());
-    // orderData.append("orderProductQuantity",orderProductQuantity.toString());
-    // orderData.append("orderProductPrice",orderProductPrice.toString());
-    console.log(orderProductName);
-
       orderData = {
         id: id,
-        shipping_id: shipping_id,
-        status: status,
-        customer_id: customer_id,
-        subtotal: subtotal,
-        tax: tax,
-        total: total,
-        date: date,
-        orderProductId: orderProductId,
-        orderProductName: orderProductName,
-        orderProductIsDonation: orderProductIsDonation,
-        orderProductIsGift: orderProductIsGift,
-        orderProductComment: orderProductComment,
-        orderProductQuantity: orderProductQuantity,
-        orderProductPrice: orderProductPrice
+        status:status,
+        shippingDetail:shippingDetail,
+        subtotal:subtotal,
+        tax:tax,
+        total:total,
+        date:date,
+        orderProducts : orderProducts,
+        paymentMethod:paymentMethod,
+        customerFullName:customerFullName,
+        phone:phone,
+        email:email,
+        shippingAddress:shippingAddress,
+        deliveryNote:deliveryNote,
+        city:city,
+        province:province,
+        postalCode:postalCode
+
       };
-      console.log(orderData);
+
+
     this.http
       .put("http://localhost:3000/api/orders/" + id, orderData)
       .subscribe(response => {
+
         const updatedOrders = [...this.orders];
         const oldOrderIndex = updatedOrders.findIndex(p => p.id === id);
         const order: Order = {
           id: id,
-          shipping_id: shipping_id,
-          status: status,
-          customer_id: customer_id,
-          subtotal: subtotal,
-          tax: tax,
-          total: total,
-          date: date,
-          orderProductId: orderProductId,
-          orderProductName: orderProductName,
-          orderProductIsDonation: orderProductIsDonation,
-          orderProductIsGift: orderProductIsGift,
-          orderProductComment: orderProductComment,
-          orderProductQuantity: orderProductQuantity,
-          orderProductPrice: orderProductPrice
+          status:status,
+          shippingDetail:shippingDetail,
+          subtotal:subtotal,
+          tax:tax,
+          total:total,
+          date:date,
+          orderProducts : orderProducts,
+          paymentMethod:paymentMethod,
+          customerFullName:customerFullName,
+          phone:phone,
+          email:email,
+          shippingAddress:shippingAddress,
+          deliveryNote:deliveryNote,
+          city:city,
+          province:province,
+          postalCode:postalCode
         };
+        console.log(order);
         updatedOrders[oldOrderIndex] = order;
+
         this.orders = updatedOrders;
         this.ordersUpdated.next([...this.orders]);
         this.router.navigate(["/"]);

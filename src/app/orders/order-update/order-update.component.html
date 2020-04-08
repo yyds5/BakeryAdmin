@@ -3,66 +3,78 @@
   <form [formGroup]="form" (submit)="onSaveOrder()" *ngIf="!isLoading">
     <span class="orderId"><strong>Order # </strong> &nbsp;{{ order.id }}&nbsp;</span>
 
+    <mat-form-field>
+      <strong>Current Shippping Detail:</strong>
+      <textarea matInput type="text" formControlName="shippingDetail"></textarea>
+      <mat-error *ngIf="form.get('shippingDetail').invalid">Please enter shipping detail.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+
+      <mat-label>New Status?</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="ToBeConfirmed">ToBeConfirmed</mat-option>
+        <mat-option value="Processing">Processing</mat-option>
+        <mat-option value="Prepared">Prepared</mat-option>
+        <mat-option value="Shipped">Shipped</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('status').invalid"></mat-error>
+    </mat-form-field>
 
     <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <span class="orderId" ><strong>Order # </strong> &nbsp;{{ order.id }}&nbsp;</span>
-      <span class="date"> <strong>Date </strong> &nbsp;{{ order.date }}&nbsp;</span>
-      <span class="status"><strong>Status </strong> &nbsp;{{order.status}}&nbsp;</span>
-    </mat-expansion-panel-header>
+      <mat-expansion-panel-header>
+        <span class="orderId"><strong>Order # </strong> &nbsp;{{ order.id }}&nbsp;</span>
+        <span class="date"> <strong>Date </strong> &nbsp;{{ order.date }}&nbsp;</span>
+        <span class="status"><strong>Status </strong> &nbsp;{{order.status}}&nbsp;</span>
+      </mat-expansion-panel-header>
 
-    <strong>Customer id </strong> &nbsp;{{ order.customer_id }}&nbsp;
+      <strong>Subtotal: </strong> &nbsp;{{ order.subtotal }}&nbsp;
+      <strong>Tax: </strong> &nbsp;{{ order.tax }}&nbsp;
+      <strong>Total: </strong> &nbsp;{{ order.total }}&nbsp;
+      <strong>Payment method </strong> &nbsp;{{ order.paymentMethod }}&nbsp;
+      <br>
+      <strong>Customer </strong> &nbsp;{{ order.customerFullName }}&nbsp;<br>
+      <strong>Phone </strong> &nbsp;{{ order.phone }}&nbsp;<br>
+      <strong>Email </strong> &nbsp;{{ order.email }}&nbsp;<br>
+      <strong>Shipping Address </strong> &nbsp;{{ order.shippingAddress }}&nbsp;<br>
+      <strong>Delivery Note </strong> &nbsp;{{ order.deliveryNote }}&nbsp;<br>
+      <strong>City </strong> &nbsp;{{ order.city }}&nbsp;<br>
+      <strong>Province </strong> &nbsp;{{ order.province }}&nbsp;<br>
+      <strong>Postal Code </strong> &nbsp;{{ order.postalCode }}&nbsp;<br>
 
-    <strong>Subtotal: </strong> &nbsp;{{ order.subtotal }}&nbsp;
-    <strong>Tax: </strong> &nbsp;{{ order.tax }}&nbsp;
-    <strong>Total: </strong> &nbsp;{{ order.total }}&nbsp;
 
-    <div class="order">
-      <div>
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Product ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Item Quantity</th>
-              <th scope="col">Item Price</th>
-              <th scope="col">Donated?</th>
-              <th scope="col">Gift?</th>
-              <th scope="col">Comment</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let k of order.orderProductName;let i = index">
-              <th scope="row">{{ order.orderProductId[i]}}</th>
-              <td>{{order.orderProductName[i]}}</td>
-              <td>{{order.orderProductQuantity[i]}}</td>
-              <td>{{order.orderProductPrice[i]}}</td>
-              <td>{{order.orderProductIsDonation[i]}}</td>
-              <td>{{order.orderProductIsGift[i]}}</td>
-              <td>{{order.orderProductComment[i]}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="order">
+        <div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Product ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Item Quantity</th>
+                <th scope="col">Item Price</th>
+                <th scope="col">Donated?</th>
+                <th scope="col">Gift?</th>
+                <th scope="col">Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let k of order.orderProducts;let i = index">
+                <th scope="row">{{ k._id}}</th>
+                <td>{{k.productName}}</td>
+                <td>{{k.quantity}}</td>
+                <td>{{k.price}}</td>
+                <td>{{k.isDonation}}</td>
+                <td>{{k.isGift}}</td>
+                <td>{{k.comment}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  </mat-expansion-panel>
-  <mat-form-field>
-    <strong>Current Shippping Detail:</strong>
-    <textarea matInput type="text" formControlName="shipping_id" placeholder=""></textarea>
-    <mat-error *ngIf="form.get('shipping_id').invalid">Please enter a shipping id.</mat-error>
-  </mat-form-field>
+    </mat-expansion-panel>
 
-  <mat-form-field>
 
-    <mat-label>New Status?</mat-label>
-    <mat-select formControlName="status">
-      <mat-option value="ToBeConfirmed">ToBeConfirmed</mat-option>
-      <mat-option value="Processing">Processing</mat-option>
-      <mat-option value="Prepared">Prepared</mat-option>
-      <mat-option value="Shipped">Shipped</mat-option>
-    </mat-select>
-    <mat-error *ngIf="form.get('status').invalid"></mat-error>
-  </mat-form-field>
+
 
     <button mat-raised-button color="accent" type="submit">Save Order</button>
   </form>

@@ -7,7 +7,7 @@
       <span class="status"><strong>Status </strong> &nbsp;{{order.status}}&nbsp;</span>
     </mat-expansion-panel-header>
 
-    <strong>Customer id </strong> &nbsp;{{ order.customer_id }}&nbsp;
+    <strong>Customer </strong> &nbsp;{{ order.customerFullName }}&nbsp;
 
     <strong>Subtotal: </strong> &nbsp;{{ order.subtotal }}&nbsp;
     <strong>Tax: </strong> &nbsp;{{ order.tax }}&nbsp;
@@ -29,14 +29,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let k of order.orderProductName;let i = index">
-              <th scope="row">{{ order.orderProductId[i]}}</th>
-              <td>{{order.orderProductName[i]}}</td>
-              <td>{{order.orderProductQuantity[i]}}</td>
-              <td>{{order.orderProductPrice[i]}}</td>
-              <td>{{order.orderProductIsDonation[i]}}</td>
-              <td>{{order.orderProductIsGift[i]}}</td>
-              <td>{{order.orderProductComment[i]}}</td>
+            <tr *ngFor="let k of order.orderProducts;let i = index">
+              <th scope="row">{{ k._id}}</th>
+              <td>{{k.productName}}</td>
+              <td>{{k.quantity}}</td>
+              <td>{{k.price}}</td>
+              <td>{{k.isDonation}}</td>
+              <td>{{k.isGift}}</td>
+              <td>{{k.comment}}</td>
             </tr>
           </tbody>
         </table>

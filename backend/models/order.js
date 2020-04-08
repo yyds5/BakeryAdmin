@@ -1,20 +1,36 @@
 const mongoose = require("mongoose");
 
 const orderSchema = mongoose.Schema({
-  shipping_id: { type: String, required: false },
-  status: { type: String, required: true },
-  customer_id: { type: String, required: true },
-  subtotal: { type: Number, required: true },
-  tax: { type: Number, required: true },
-  total: { type: Number, required: true },
-  date: { type: String},
-  orderProductId:  { type: Array },
-  orderProductName: { type: Array},
-  orderProductIsDonation: { type: Array},
-  orderProductIsGift: { type: Array},
-  orderProductComment: { type: Array},
-  orderProductQuantity: { type: Array},
-  orderProductPrice:{ type: Array}
+  status:{type:String},
+    subtotal:{type:Number},
+    tax:{type:Number},
+    total:{type:Number},
+    date:{type:Date},
+    orderProducts:[{
+    Id:{type:String},
+    productName:{type:String},
+    isDonation:{type:String},
+    isGift:{type:String},
+    comment:{type:String},
+    price:{type:Number},
+    quantity:{type:Number}
+
+    }],
+    paymentMethod:{type:String},
+    customerFullName:{type:String},
+    phone:{type:String},
+    email:{type:String},
+    shippingAddress:{type:String},
+    deliveryNote:{type:String},
+    city:{type:String},
+    province:{type:String},
+    postalCode:{type:String},
+    shippingDetail:{type:String}
+
+},{
+
+    collection: 'orders'
 })
+
 
 module.exports = mongoose.model("Order", orderSchema);

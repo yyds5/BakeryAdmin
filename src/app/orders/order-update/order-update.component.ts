@@ -15,6 +15,8 @@ import {
 import {
   Order
 } from "../order.model";
+import { orderProducts } from "../order.model";
+
 import {
   OrdersService
 } from "../orders.service";
@@ -49,7 +51,7 @@ export class OrderUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      shipping_id: new FormControl(null, {
+      shippingDetail: new FormControl(null, {
         validators: [Validators.required]
       }),
       status: new FormControl(null, {
@@ -61,46 +63,50 @@ export class OrderUpdateComponent implements OnInit {
       if (paramMap.has("order_id")) {
         this.mode = "edit";
         this.orderId = paramMap.get("order_id");
-        console.log(this.orderId)
 
         this.isLoading = true;
         this.ordersService.getOrder(this.orderId).subscribe(orderData => {
           this.isLoading = false;
           this.order = {
             id: orderData._id,
-            shipping_id: orderData.shipping_id,
             status: orderData.status,
-            customer_id: orderData.customer_id,
+            shippingDetail: orderData.shippingDetail,
             subtotal: orderData.subtotal,
             tax: orderData.tax,
             total: orderData.total,
             date: orderData.date,
-            orderProductId: orderData.orderProductId,
-            orderProductName: orderData.orderProductName,
-            orderProductIsDonation: orderData.orderProductIsDonation,
-            orderProductIsGift: orderData.orderProductIsGift,
-            orderProductComment: orderData.orderProductComment,
-            orderProductQuantity: orderData.orderProductQuantity,
-            orderProductPrice: orderData.orderProductPrice
+            orderProducts: orderData.orderProducts,
+            paymentMethod: orderData.paymentMethod,
+            customerFullName: orderData.customerFullName,
+            phone: orderData.phone,
+            email: orderData.email,
+            shippingAddress: orderData.shippingAddress,
+            deliveryNote: orderData.deliveryNote,
+            city: orderData.city,
+            province: orderData.province,
+            postalCode: orderData.postalCode,
           };
-          console.log(this.order)
 
           this.form.setValue({
-            shipping_id: this.order.shipping_id,
             status: this.order.status,
-            customer_id: this.order.customer_id,
-            subtotal: this.order.subtotal,
-            tax: this.order.tax,
-            total: this.order.total,
-            date: this.order.date,
-            orderProductId: this.order.orderProductId,
-            orderProductName: this.order.orderProductName,
-            orderProductIsDonation: this.order.orderProductIsDonation,
-            orderProductIsGift: this.order.orderProductIsGift,
-            orderProductComment: this.order.orderProductComment,
-            orderProductQuantity: this.order.orderProductQuantity,
-            orderProductPrice: this.order.orderProductPrice
+            shippingDetail: this.order.shippingDetail,
+            // subtotal: this.order.subtotal,
+            // tax: this.order.tax,
+            // total: this.order.total,
+            // date: this.order.date,
+            // orderProducts: this.order.orderProducts,
+            // paymentMethod: this.order.paymentMethod,
+            // customerFullName: this.order.customerFullName,
+            // phone: this.order.phone,
+            // email: this.order.email,
+            // shippingAddress: this.order.shippingAddress,
+            // deliveryNote: this.order.deliveryNote,
+            // city: this.order.city,
+            // province: this.order.province,
+            // postalCode: this.order.postalCode,
           });
+          console.log(this.order.orderProducts)
+
         });
       } else {
         this.mode = "create";
@@ -117,27 +123,31 @@ export class OrderUpdateComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    console.log(this.orderId)
-    console.log(this.form.value.orderProductId)
+    console.log(this.order.orderProducts)
+    // console.log(this.form.value.orderProducts)
+
 
     this.isLoading = true;
     this.ordersService.updateOrder(
-      this.orderId,
-      this.form.value.shipping_id,
+      this.order.id,
       this.form.value.status,
-      this.order.customer_id,
+      this.form.value.shippingDetail,
       this.order.subtotal,
       this.order.tax,
       this.order.total,
       this.order.date,
-      this.order.orderProductId,
-      this.order.orderProductName,
-      this.order.orderProductIsDonation,
-      this.order.orderProductIsGift,
-      this.order.orderProductComment,
-      this.order.orderProductQuantity,
-      this.order.orderProductPrice
+      this.order.orderProducts,
+      this.order.paymentMethod,
+      this.order.customerFullName,
+      this.order.phone,
+      this.order.email,
+      this.order.shippingAddress,
+      this.order.deliveryNote,
+      this.order.city,
+      this.order.province,
+      this.order.postalCode
     );
+
     this.form.reset();
   }
 

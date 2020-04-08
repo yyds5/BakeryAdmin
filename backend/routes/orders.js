@@ -32,21 +32,22 @@ router.post(
   (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
     const order = new Order({
-      shipping_id: req.body.shipping_id,
       status: req.body.status,
-      customer_id: req.body.customer_id,
+      shippingDetail: req.body.shippingDetail,
       subtotal: req.body.subtotal,
       tax: req.body.tax,
       total: req.body.total,
       date: req.body.date,
-      orderProductId: req.body.orderProductId,
-      orderProductName: req.body.orderProductName,
-      orderProductIsDonation: req.body.orderProductIsDonation,
-      orderProductIsGift: req.body.orderProductIsGift,
-      orderProductComment: req.body.orderProductComment,
-      orderProductQuantity: req.body.orderProductQuantity,
-      orderProductPrice: req.body.orderProductPrice
-
+      orderProducts: req.body.orderProducts,
+      paymentMethod: req.body.paymentMethod,
+      customerFullName: req.body.customerFullName,
+      phone: req.body.phone,
+      email: req.body.email,
+      shippingAddress: req.body.shippingAddress,
+      deliveryNote: req.body.deliveryNote,
+      city: req.body.city,
+      province: req.body.province,
+      postalCode: req.body.postalCode,
     });
     order.save().then(createOrder => {
       res.status(201).json({
@@ -72,20 +73,22 @@ router.put(
     }
     const order = new Order({
       _id: req.body.id,
-      shipping_id: req.body.shipping_id,
       status: req.body.status,
-      customer_id: req.body.customer_id,
+      shippingDetail: req.body.shippingDetail,
       subtotal: req.body.subtotal,
       tax: req.body.tax,
       total: req.body.total,
       date: req.body.date,
-      orderProductId: req.body.orderProductId,
-      orderProductName: req.body.orderProductName,
-      orderProductIsDonation: req.body.orderProductIsDonation,
-      orderProductIsGift: req.body.orderProductIsGift,
-      orderProductComment: req.body.orderProductComment,
-      orderProductQuantity: req.body.orderProductQuantity,
-      orderProductPrice: req.body.orderProductPrice
+      orderProducts: req.body.orderProducts,
+      paymentMethod: req.body.paymentMethod,
+      customerFullName: req.body.customerFullName,
+      phone: req.body.phone,
+      email: req.body.email,
+      shippingAddress: req.body.shippingAddress,
+      deliveryNote: req.body.deliveryNote,
+      city: req.body.city,
+      province: req.body.province,
+      postalCode: req.body.postalCode,
     });
     console.log(order);
     Order.updateOne({ _id: req.params.id }, order).then(result => {
