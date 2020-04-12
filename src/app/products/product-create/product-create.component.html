@@ -80,6 +80,6 @@
       </mat-select>
       <mat-error *ngIf="form.get('visibility').invalid">Please select item visibility.</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="accent" type="submit">Save Product</button>
+    <button *ngIf="userIsAuthenticated" mat-raised-button color="accent" type="submit">Save Product</button>
   </form>
 </mat-card>

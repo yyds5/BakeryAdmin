@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  OnDestroy
 } from "@angular/core";
 import {
   FormGroup,
@@ -105,8 +106,12 @@ export class OrderUpdateComponent implements OnInit {
             // province: this.order.province,
             // postalCode: this.order.postalCode,
           });
-          console.log(this.order.orderProducts)
-
+          this.userIsAuthenticated = this.authService.getIsAuth();
+          this.authStatusSub = this.authService
+            .getAuthStatusListener()
+            .subscribe(isAuthenticated => {
+              this.userIsAuthenticated = isAuthenticated;
+            });
         });
       } else {
         this.mode = "create";

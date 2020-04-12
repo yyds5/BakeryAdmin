@@ -27,9 +27,6 @@ const orderSchema = mongoose.Schema({
     postalCode:{type:String},
     shippingDetail:{type:String}
 
-},{
-
-    collection: 'orders'
 })
 
 

@@ -1,10 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 
 import { ProductsService } from "../products.service";
 import { Product } from "../product.model";
 import { mimeType } from "./mime-type.validator";
+import { AuthService } from "../../auth/auth.service";
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: "app-product-create",
@@ -21,10 +24,14 @@ export class ProductCreateComponent implements OnInit {
   imagePreview: string;
   private mode = "create";
   private productId: string;
+  private productsSub: Subscription;
+  private authStatusSub: Subscription;
+  userIsAuthenticated = false;
 
   constructor(
     public productsService: ProductsService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -94,10 +101,22 @@ export class ProductCreateComponent implements OnInit {
             allergyContent: this.product.allergyContent,
             visibility:this.product.visibility
           });
+          this.userIsAuthenticated = this.authService.getIsAuth();
+          this.authStatusSub = this.authService
+            .getAuthStatusListener()
+            .subscribe(isAuthenticated => {
+              this.userIsAuthenticated = isAuthenticated;
+            });
         });
       } else {
         this.mode = "create";
         this.productId = null;
+        this.userIsAuthenticated = this.authService.getIsAuth();
+        this.authStatusSub = this.authService
+          .getAuthStatusListener()
+          .subscribe(isAuthenticated => {
+            this.userIsAuthenticated = isAuthenticated;
+          });
       }
     });
   }
@@ -159,4 +178,5 @@ export class ProductCreateComponent implements OnInit {
     }
     this.form.reset();
   }
+
 }

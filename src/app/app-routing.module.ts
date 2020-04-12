@@ -9,6 +9,7 @@ import { ProductCreateComponent } from "./products/product-create/product-create
 import { OrderListComponent } from "./orders/order-list/order-list.component";
 import { OrderUpdateComponent } from "./orders/order-update/order-update.component";
 import { LoginComponent } from "./auth/login/login.component";
+import { ReportsComponent } from "./reports/reports.component";
 
 import { LogoutComponent } from "./logout/logout.component";
 import { SignupComponent } from "./auth/signup/signup.component";
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: "signup", component: SignupComponent },
+  { path: "reports", component: ReportsComponent }
 
 
 

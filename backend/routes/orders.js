@@ -107,6 +107,18 @@ router.get("", (req, res, next) => {
   });
 });
 
+//get orders base on donations
+// {"orderProducts.Object.isDonation" : "true"}
+router.get("/donations", (req, res, next) => {
+  Order.find({"orderProducts.isDonation" : "true"}).then(order => {
+    if (order) {
+      res.status(200).json(order);
+    } else {
+      res.status(404).json({ message: "order not found!" });
+    }
+  });
+});
+
 router.get("/:id", (req, res, next) => {
   Order.findById(req.params.id).then(order => {
     if (order) {
@@ -117,15 +129,6 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
-// //get one base on the id
-// router.get("/:id", (req, res, next) => {
-//   Order.findOne({order_id:req.params.id}).then(order => {
-//     if (order) {
-//       res.status(200).json(order);
-//     } else {
-//       res.status(404).json({ message: "order not found!" });
-//     }
-//   });
-// });
+
 
 module.exports = router;

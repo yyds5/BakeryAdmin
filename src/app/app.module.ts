@@ -25,6 +25,7 @@ import { LoginComponent } from "./auth/login/login.component";
 import { SignupComponent } from "./auth/signup/signup.component";
 import { LogoutComponent } from "./logout/logout.component";
 import { AuthInterceptor } from "./auth/auth-interceptor";
+import { ReportsComponent } from "./reports/reports.component";
 
 
 
@@ -43,7 +44,8 @@ import { AppRoutingModule } from "./app-routing.module";
     OrderUpdateComponent,
     LoginComponent,
     LogoutComponent,
-    SignupComponent
+    SignupComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

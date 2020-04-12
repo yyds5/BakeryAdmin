@@ -4,11 +4,12 @@ import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 
-import { Order } from "./order.model";
-import { orderProducts } from "./order.model";
+import { Order } from "../orders/order.model";
+import { orderProducts } from "../orders/order.model";
+import { jsonpCallbackContext } from "@angular/common/http/src/module";
 
 @Injectable({ providedIn: "root" })
-export class OrdersService {
+export class ReportsService {
   private orders: Order[] = [];
   private ordersUpdated = new Subject<Order[]>();
 
@@ -17,46 +18,9 @@ export class OrdersService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // getOrdersWithDonation() {
-  //   this.http
-  //     .get<{ message: string; orders: any }>("http://localhost:3000/api/orders/donations")
-  //     .pipe(
-  //       map(orderData => {
-  //         return orderData.orders.map(order => {
-  //           return {
-  //             id: order._id,
-  //             status:order.status,
-  //             shippingDetail:order.shippingDetail,
-  //             subtotal:order.subtotal,
-  //             tax:order.tax,
-  //             total:order.total,
-  //             date:order.date,
-  //             orderProducts : order.orderProducts,
-  //             paymentMethod:order.paymentMethod,
-  //             customerFullName:order.customerFullName,
-  //             phone:order.phone,
-  //             email:order.email,
-  //             shippingAddress:order.shippingAddress,
-  //             deliveryNote:order.deliveryNote,
-  //             city:order.city,
-  //             province:order.province,
-  //             postalCode:order.postalCode
-  //           };
-  //         });
-  //       })
-  //     )
-  //     .subscribe(transformedDonationOrders => {
-  //       this.donationOrders = transformedDonationOrders;
-  //       this.donationOrdersUpdated.next([...this.donationOrders]);
-  //     });
-  //     console.log(this.donationOrdersUpdated);
-  //     console.log(this.donationOrders);
-
-  // }
-
   getOrders() {
     this.http
-      .get<{ message: string; orders: any }>("http://localhost:3000/api/orders")
+      .get<{ message: string; orders: any }>("http://localhost:3000/api/orders/donations")
       .pipe(
         map(orderData => {
           return orderData.orders.map(order => {
@@ -100,11 +64,11 @@ export class OrdersService {
   getDonationOrderUpdateListener() {
     return this.donationOrdersUpdated.asObservable();
   }
-
-
   getOrderUpdateListener() {
     return this.ordersUpdated.asObservable();
   }
+
+
 
   getOrder(id: string) {
     return this.http.get<{

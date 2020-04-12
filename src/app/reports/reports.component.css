@@ -1,0 +1,24 @@
+.status{
+  float: right;
+  width:200px;
+}
+
+.orderId{
+  width:400px;
+}
+
+.date{
+  float:left;
+  width:500px;
+}
+mat-accordion{
+  background-color: blueviolet;
+}
+
+.table{
+  width: 100%;
+}
+
+td{
+  text-align: center;
+}
