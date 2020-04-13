@@ -13,14 +13,15 @@ import {ReportsService} from "./reports.service";
 })
 
 export class ReportsComponent implements OnInit,OnDestroy {
-  orders: Order[] = [];
   isLoading = false;
-  private ordersSub: Subscription;
-  private authStatusSub: Subscription;
   userIsAuthenticated = false;
+  private authStatusSub: Subscription;
 
-  private ordersDonationSub: Subscription;
+  orders: Order[] = [];
+  private ordersSub: Subscription;
+
   ordersWithDonation: Order[] = [];
+  private ordersDonationSub: Subscription;
 
   constructor(public ordersService: OrdersService, public reportsService:ReportsService,
     private authService: AuthService) {}
@@ -28,24 +29,21 @@ export class ReportsComponent implements OnInit,OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     this.ordersService.getOrders();
+    //donation orders
+    this.reportsService.getDonationOrders();
+    this.ordersDonationSub = this.reportsService.getOrderUpdateListener()
+      .subscribe((ordersWithDonation: Order[]) => {
+        this.isLoading = false;
+        this.ordersWithDonation = ordersWithDonation;
+    console.log(this.ordersWithDonation);
+      });
+
     this.ordersSub = this.ordersService.getOrderUpdateListener()
       .subscribe((orders: Order[]) => {
         this.isLoading = false;
         this.orders = orders;
       console.log(this.orders);
       });
-
-      //donation orders
-      this.reportsService.getOrders();
-      this.ordersDonationSub = this.reportsService.getOrderUpdateListener()
-        .subscribe((ordersWithDonation: Order[]) => {
-          this.isLoading = false;
-          this.ordersWithDonation = ordersWithDonation;
-      console.log(this.ordersWithDonation);
-        });
-
-
-
 
       this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService
@@ -54,6 +52,10 @@ export class ReportsComponent implements OnInit,OnDestroy {
         this.userIsAuthenticated = isAuthenticated;
       });
   }
+
+  ConvertToJSON(product: any) {
+    return JSON.parse(product);
+}
 
   ngOnDestroy() {
     this.ordersSub.unsubscribe();

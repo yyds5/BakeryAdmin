@@ -33,32 +33,31 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<mat-accordion multi="true" >
-  <mat-expansion-panel>
+<mat-accordion multi="true" *ngIf="ordersWithDonation.length > 0 && !isLoading" >
+  <mat-expansion-panel >
     <mat-expansion-panel-header>
-      Donation Report
+      Donor Report
     </mat-expansion-panel-header>
     <div class="salesReport" *ngFor="let order of ordersWithDonation">
-      <div>
-        <table class="table">
+
+      <div >
+        <table class="table" >
           <thead class="thead-dark">
-            <tr>
+            <tr >
               <th scope="col">Order Number</th>
               <th scope="col">Status</th>
               <th scope="col">Customer</th>
-              <th scope="col">Payment Method</th>
               <th scope="col">Phone</th>
-              <th scope="col">Total</th>
+              <th scope="col">Email</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr >
               <th scope="row">{{ order.id}}</th>
               <td>{{order.status}}</td>
               <td>{{order.customerFullName}}</td>
-              <td>{{order.paymentMethod}}</td>
               <td>{{order.phone}}</td>
-              <td>{{order.total}}</td>
+              <td>{{order.email}}</td>
             </tr>
           </tbody>
         </table>

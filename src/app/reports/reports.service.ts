@@ -6,7 +6,6 @@ import { Router } from "@angular/router";
 
 import { Order } from "../orders/order.model";
 import { orderProducts } from "../orders/order.model";
-import { jsonpCallbackContext } from "@angular/common/http/src/module";
 
 @Injectable({ providedIn: "root" })
 export class ReportsService {
@@ -18,7 +17,7 @@ export class ReportsService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getOrders() {
+  getDonationOrders() {
     this.http
       .get<{ message: string; orders: any }>("http://localhost:3000/api/orders/donations")
       .pipe(
@@ -49,18 +48,10 @@ export class ReportsService {
       .subscribe(transformedOrders => {
         this.orders = transformedOrders;
         this.ordersUpdated.next([...this.orders]);
+        console.log(this.orders)
       });
   }
-// //get one base on the id
-// router.get("/:id", (req, res, next) => {
-//   Order.findOne({order_id:req.params.id}).then(order => {
-//     if (order) {
-//       res.status(200).json(order);
-//     } else {
-//       res.status(404).json({ message: "order not found!" });
-//     }
-//   });
-// });
+
   getDonationOrderUpdateListener() {
     return this.donationOrdersUpdated.asObservable();
   }
@@ -69,106 +60,5 @@ export class ReportsService {
   }
 
 
-
-  getOrder(id: string) {
-    return this.http.get<{
-      _id: string,
-      status:string,
-      shippingDetail:string,
-      subtotal:number,
-      tax:number,
-      total:number,
-      date:Date,
-      orderProducts : Array<orderProducts>,
-      paymentMethod:string,
-      customerFullName:string,
-      phone:string,
-      email:string,
-      shippingAddress:string,
-      deliveryNote:string,
-      city:string,
-      province:string,
-      postalCode:string
-      }>(
-      "http://localhost:3000/api/orders/" + id
-    );
-  }
-
-  updateOrder(
-    id: string,
-    status:string,
-    shippingDetail:string,
-      subtotal:number,
-      tax:number,
-      total:number,
-      date:Date,
-      orderProducts,
-      paymentMethod:string,
-      customerFullName:string,
-      phone:string,
-      email:string,
-      shippingAddress:string,
-      deliveryNote:string,
-      city:string,
-      province:string,
-      postalCode:string
-       ) {
-    let orderData: Order | FormData;
-    orderData = new FormData();
-      orderData = {
-        id: id,
-        status:status,
-        shippingDetail:shippingDetail,
-        subtotal:subtotal,
-        tax:tax,
-        total:total,
-        date:date,
-        orderProducts : orderProducts,
-        paymentMethod:paymentMethod,
-        customerFullName:customerFullName,
-        phone:phone,
-        email:email,
-        shippingAddress:shippingAddress,
-        deliveryNote:deliveryNote,
-        city:city,
-        province:province,
-        postalCode:postalCode
-
-      };
-
-
-    this.http
-      .put("http://localhost:3000/api/orders/" + id, orderData)
-      .subscribe(response => {
-
-        const updatedOrders = [...this.orders];
-        const oldOrderIndex = updatedOrders.findIndex(p => p.id === id);
-        const order: Order = {
-          id: id,
-          status:status,
-          shippingDetail:shippingDetail,
-          subtotal:subtotal,
-          tax:tax,
-          total:total,
-          date:date,
-          orderProducts : orderProducts,
-          paymentMethod:paymentMethod,
-          customerFullName:customerFullName,
-          phone:phone,
-          email:email,
-          shippingAddress:shippingAddress,
-          deliveryNote:deliveryNote,
-          city:city,
-          province:province,
-          postalCode:postalCode
-        };
-        console.log(order);
-        updatedOrders[oldOrderIndex] = order;
-
-        this.orders = updatedOrders;
-        this.ordersUpdated.next([...this.orders]);
-        this.router.navigate(["/"]);
-      });
-  }
 
 }

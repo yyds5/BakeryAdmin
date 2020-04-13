@@ -97,6 +97,50 @@ router.put(
   }
 );
 
+//get orders base on donations
+router.get("/donations", (req, res, next) => {
+  Order.find({"orderProducts.isDonation" : "true"}).then(documents => {
+    res.status(200).json({
+      message: "Orders fetched successfully!",
+
+      orders: documents
+    });
+  });
+});
+
+//filter donation's not donated products
+// router.get("/donations", (req, res, next) => {
+//   Order.aggregate([
+//     {
+//        $project: {
+//         orderProducts: {
+//              $filter: {
+//                 input: "$orderProducts",
+//                 as: "item",
+//                 cond: { $eq: [ "$$item.isDonation", "true"] }
+//              },
+//           }
+//        }
+//     },
+//     {$unwind:"$orderProducts"}
+//  ]).then(documents => {
+//     res.status(200).json({
+//       message: "Orders fetched successfully!",
+//       orders: documents
+//     });
+//   })})
+
+router.get("/gifts", (req, res, next) => {
+  Order.find({"orderProducts.isGift" : "true"}).then(documents => {
+    res.status(200).json({
+      message: "Orders fetched successfully!",
+
+      orders: documents
+    });
+  });
+});
+
+
 router.get("", (req, res, next) => {
   Order.find().then(documents => {
     res.status(200).json({
@@ -107,17 +151,7 @@ router.get("", (req, res, next) => {
   });
 });
 
-//get orders base on donations
-// {"orderProducts.Object.isDonation" : "true"}
-router.get("/donations", (req, res, next) => {
-  Order.find({"orderProducts.isDonation" : "true"}).then(order => {
-    if (order) {
-      res.status(200).json(order);
-    } else {
-      res.status(404).json({ message: "order not found!" });
-    }
-  });
-});
+
 
 router.get("/:id", (req, res, next) => {
   Order.findById(req.params.id).then(order => {
